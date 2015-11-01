@@ -1,0 +1,17 @@
+
+.container {
+	max-width: 600px;
+	text-align: center;
+	margin: 20px auto;
+}
+th{
+	font-size: 120%;
+	text-align: center;
+}
+#active{
+
+	background-color: #5BC0DE !important;
+}
+td{
+	text-align: center;
+}
