@@ -1,0 +1,34 @@
+
+.container {
+	max-width: 1000px;
+	text-align: center;
+	margin: 20px auto;
+}
+th{
+	font-size: 120%;
+	text-align: center;
+}
+#active{
+
+	background-color: #5BC0DE !important;
+}
+td{
+	text-align: center;
+}
+.glyphicon-remove{
+	margin-top: 4%;
+	margin-right: 3%;
+	font-size: 600px;
+}
+#dartboard{
+	height: auto;
+	width:400px;
+}
+.span2{
+	max-width: 400px;
+	float: left;
+}
+.span8{
+	max-width: 600px;
+	float: right;
+}
