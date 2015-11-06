@@ -15,6 +15,9 @@ th{
 td{
 	text-align: center;
 }
+.glyphicon{
+	font-size: 135%;
+}
 .glyphicon-remove{
 	margin-top: 4%;
 	margin-right: 3%;
@@ -22,13 +25,14 @@ td{
 }
 #dartboard{
 	height: auto;
-	width:400px;
+	width:600px;
 }
-.span2{
+#righty{
 	max-width: 400px;
-	float: left;
+	margin-top: 80px;
+	float:left;
 }
-.span8{
-	max-width: 600px;
-	float: right;
+#lefty{
+	width:600px;
+	
 }

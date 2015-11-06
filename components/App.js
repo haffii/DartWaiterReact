@@ -93,17 +93,14 @@ getInitialState: function() {
   },
 	render(){
 	return (
-
-    <div className = "container-fluid">
-      <h1>Dart Waiter</h1> 
-      <div className="row-fluid">
-        <div className="span4">
-          <Players onNameSubmit = {this.addPlayer} gameOn = {this.startGame}/>
-          </div>
-        
-        <div className="span6"><DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/></div>
+			<div className="row">
+      <h1>Dart Waiter</h1>
+      <div id = "lefty" className="col-xs-6 col-sm-3"><DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/></div>
+			<div id= "righty" className="col-xs-6 col-sm-3">
+        <Players onNameSubmit = {this.addPlayer} gameOn = {this.startGame}/>
+        <ScoreBoard gameOn = {this.state.gameOn} score = {this.state.score} turn = {this.state.turn} roundScore = {this.state.roundScore} players = {this.state.players}/>
       </div>
-    </div>
+      </div>
 
 		);
 	}
