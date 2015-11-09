@@ -3,6 +3,7 @@ var React = require('react');
 var ScoreBoard = React.createClass({
 getInitialState: function() {
     return {
+      names:[],
       rows:[],
     };
   },
@@ -13,32 +14,33 @@ getInitialState: function() {
     var turn = this.props.turn;
     var roundScore = this.props.roundScore;
     this.state.rows = [];
-
-    if(!this.props.gameOn){
-      for(var i = 0; i<playerArr.length;i++){
-        this.state.rows.push(<tr><th>{playerArr[i]}</th></tr>);
-        }
-    }
-    else{
     for(var i = 0; i<playerArr.length;i++){
-      inner.push(<th>{playerArr[i]} :</th>);
-      for(var x = 0; x<scoreArr[i].length;x++){
-        if(x ==scoreArr[i].length-1){
-          inner.push(<td>{scoreArr[i][x]}</td>)
-        }
-        else{
-          inner.push(<td><s>{scoreArr[i][x]}</s></td>)
-        }
-          
+       inner.push(<th>{playerArr[i]}</th>)
       }
-      this.state.rows.push(<tr>{inner}</tr>);
+      this.state.names = <tr>{inner}</tr>
+    if(this.props.gameOn){
       inner = [];
+      console.log(scoreArr.length);
+      for(var i = 0; i<scoreArr[0].length;i++){
+        for(var x = 0; x<scoreArr.length;x++){
+          inner.push(<td>{scoreArr[x][i]}</td>);
+        }
+        this.state.rows.push(<tr>{inner}</tr>);
+        inner = [];
+      }
+      
     }
-  }
     this.state.rows=this.state.rows;
 
 		return (
-			<table className="table">{this.state.rows}</table>
+			<table className="table">
+      <thead>
+       {this.state.names}
+      </thead>
+      <tbody>
+        {this.state.rows}
+      </tbody>
+      </table>
 			)
 
 	}

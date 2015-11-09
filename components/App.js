@@ -1,8 +1,10 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Players = require('./Players');
 var ScoreBoard = require('./ScoreBoard');
 var DartBoard = require('./DartBoard');
 var Contestants = require('./Contestants');
+var MyModal = require('./MyModal');
 var App = React.createClass({
 getInitialState: function() {
     return {
@@ -11,7 +13,8 @@ getInitialState: function() {
       roundScore:[],
       turn : 0,
       gameOn: false,
-      gameOnElements:[]
+      gameOnElements:[],
+      modalIsOpen:false
     };
   },
  addPlayer: function(name){
@@ -77,10 +80,10 @@ getInitialState: function() {
  },
  startGame: function(value){
  	this.setState({gameOn:true});
+  this.setState({modalIsOpen:true});
  	for(var i = 0; i<this.state.players.length;i++){
- 		this.state.score.push([300]);
+ 		this.state.score.push([301]);
  	}
- 	return this.setState({gameOnElements:<row> <td><ScoreBoard score = {this.state.score} turn = {this.state.turn} roundScore = {this.state.roundScore} players = {this.state.players}/></td><td><DartBoard onHit = {this.addScore} gameOn = {this.gameOn}/></td></row>})	
  },
  			
  editPlayers: function(players){
@@ -100,6 +103,7 @@ getInitialState: function() {
         <Players onNameSubmit = {this.addPlayer} gameOn = {this.startGame}/>
         <ScoreBoard gameOn = {this.state.gameOn} score = {this.state.score} turn = {this.state.turn} roundScore = {this.state.roundScore} players = {this.state.players}/>
       </div>
+      <MyModal modalIsOpen={this.state.modalIsOpen}/>
       </div>
 
 		);

@@ -11,7 +11,7 @@ var DartBoard = React.createClass({
 		return (
 	<svg onClick = {this.handleClick} id="dartboard" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" >
   <circle id = "00" fill-rule="evenodd" clip-rule="evenodd" fill="#3F4444" cx="500" cy="500" r="470"/>
-  <path id = "" fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M500.929,854.508c-193.103,0.147-353.385-155.797-353.51-353.65
+  <path id = "borders" fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M500.929,854.508c-193.103,0.147-353.385-155.797-353.51-353.65
   c-0.123-195.486,158.49-353.368,353.763-353.403c192.508-0.034,353.338,155.271,353.342,353.539
   C854.528,699.078,693.818,854.742,500.929,854.508z M265.299,734.896c0.354-0.305,0.783-0.628,1.159-1.004
   c24.766-24.758,49.52-49.527,74.311-74.26c1.241-1.237,1.239-2.045-0.016-3.231c-4.587-4.334-8.646-9.152-12.652-14.018
