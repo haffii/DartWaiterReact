@@ -3,7 +3,6 @@ var Grid = require('react-bootstrap').Grid;
 var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
 
-var Tappable = require('react-tappable');
 var ReactDOM = require('react-dom');
 var Players = require('./Players');
 var ScoreBoard = require('./ScoreBoard');
@@ -99,16 +98,11 @@ getInitialState: function() {
             return {items: state.players};
         });
   },
-  handleTapEvent: function(event){
-    console.log("FUUUUUUCKKKK");
-    alert("OHHH-YEAAA");
-  },
 	render(){
 	return (
       <Grid>
       <Row>
      <Col md={12}> <h1 className="span12">Dart Waiter</h1></Col>
-     <Tappable onTap={this.handleTapEvent}>Tap me</Tappable>
       </Row>
 			<Row>
       <Col xs={12} md={8}><DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/></Col>
