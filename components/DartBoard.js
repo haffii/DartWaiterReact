@@ -1,14 +1,19 @@
 var React = require('react');
-
+var ReactDOM = require("react-dom");
+injectTapEventPlugin = require("react-tap-event-plugin");
+injectTapEventPlugin();
+ 
 var DartBoard = React.createClass({
 	handleClick : function(event){
-
     if(this.props.gameOn)
       this.props.onHit({score: event.target.id});    
 	},
+  handleTouchTap : function(event){
+    Alert("FUCK");    
+  },
 	render(){
 		return (
-	<svg onTouchStart={this.handleClick} onClick = {this.handleClick} id="dartboard" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" >
+	<svg onTouchTap={this.handleTouchTap} onClick = {this.handleClick} id="dartboard" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" >
   <circle id = "00" fill-rule="evenodd" clip-rule="evenodd" fill="#3F4444" cx="500" cy="500" r="470"/>
   <path id = "borders" fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M500.929,854.508c-193.103,0.147-353.385-155.797-353.51-353.65
   c-0.123-195.486,158.49-353.368,353.763-353.403c192.508-0.034,353.338,155.271,353.342,353.539
