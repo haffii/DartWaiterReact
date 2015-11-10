@@ -6,9 +6,6 @@ var DartBoard = React.createClass({
     if(this.props.gameOn)
       this.props.onHit({score: event.target.id});    
 	},
-componentWillMount: function(){
-    React.initializeTouchEvents(true);
-  },
 	render(){
 		return (
 	<svg onTouchStart={this.handleClick} onClick = {this.handleClick} id="dartboard" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" >
