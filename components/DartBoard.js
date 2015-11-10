@@ -2,17 +2,15 @@ var React = require('react');
 var ReactDOM = require("react-dom");
 var Tappable = require('react-tappable');
 var DartBoard = React.createClass({
-	handleClick : function(event){
-    if(this.props.gameOn)
-      this.props.onHit({score: event.target.id});    
-	},
   handleTapEvent: function(event){
-    console.log("FUUUUUUCKKKK");
-    alert("OHHH-YEAAA");
+     if(this.props.gameOn)
+      this.props.onHit({score: event.target.id});  
   },
+
 	render(){
 		return (
-	<svg onTap={this.handleTapEvent} onTouchTap={this.handleTouchTap} onClick = {this.handleClick} id="dartboard" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" >
+  <Tappable onTap={this.handleTapEvent}>
+	<svg id="dartboard" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" >
   <circle id = "00" fill-rule="evenodd" clip-rule="evenodd" fill="#3F4444" cx="500" cy="500" r="470"/>
   <path id = "borders" fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M500.929,854.508c-193.103,0.147-353.385-155.797-353.51-353.65
   c-0.123-195.486,158.49-353.368,353.763-353.403c192.508-0.034,353.338,155.271,353.342,353.539
@@ -930,9 +928,8 @@ var DartBoard = React.createClass({
   c0-3.959-2.593-6.695-7.561-6.695c-4.32,0-7.417,1.8-9.577,3.527l-0.864-0.359V88.357h24.482v8.065h-16.418v7.921
   c0.937-0.576,3.097-1.08,5.257-1.08c9.072,0,15.049,6.696,15.049,14.977c0,8.064-5.4,15.121-16.849,15.121
   C366.913,133.361,361.657,128.754,359.641,123.857z"/>
-
-
   </svg>
+  </Tappable>
 		);
 	}
 
