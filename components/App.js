@@ -1,4 +1,8 @@
 var React = require('react');
+var Grid = require('react-bootstrap').Grid;
+var Row = require('react-bootstrap').Row;
+var Col = require('react-bootstrap').Col;
+
 var ReactDOM = require('react-dom');
 var Players = require('./Players');
 var ScoreBoard = require('./ScoreBoard');
@@ -80,7 +84,7 @@ getInitialState: function() {
  },
  startGame: function(value){
  	this.setState({gameOn:true});
-  this.setState({modalIsOpen:true});
+  //this.setState({modalIsOpen:true});
  	for(var i = 0; i<this.state.players.length;i++){
  		this.state.score.push([301]);
  	}
@@ -96,15 +100,20 @@ getInitialState: function() {
   },
 	render(){
 	return (
-			<div className="row">
-      <h1>Dart Waiter</h1>
-      <div id = "lefty" className="col-xs-6 col-sm-3"><DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/></div>
-			<div id= "righty" className="col-xs-6 col-sm-3">
-        <Players onNameSubmit = {this.addPlayer} gameOn = {this.startGame}/>
-        <ScoreBoard gameOn = {this.state.gameOn} score = {this.state.score} turn = {this.state.turn} roundScore = {this.state.roundScore} players = {this.state.players}/>
-      </div>
+      <Grid>
+      <Row>
+     <Col md={12}> <h1 className="span12">Dart Waiter</h1></Col>
+      </Row>
+			<Row>
+      <Col xs={12} md={8}><DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/></Col>
+			
+      <Col md={12} md={4}>
+      <Players onNameSubmit = {this.addPlayer} gameOn = {this.startGame}/>
+      <ScoreBoard gameOn = {this.state.gameOn} score = {this.state.score} turn = {this.state.turn} roundScore = {this.state.roundScore} players = {this.state.players}/>
+      </Col>
+      </Row>
       <MyModal modalIsOpen={this.state.modalIsOpen}/>
-      </div>
+      </Grid>
 
 		);
 	}

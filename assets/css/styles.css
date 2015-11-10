@@ -25,18 +25,22 @@ td{
 	font-size: 600px;
 }
 #dartboard{
-	height: auto;
-	width:80%;
+	
 }
 #righty{
 	margin-top: 80px;
-	width: 400px;
+	max-width: 300px;
 }
 #lefty{
-	width: 600px;
+	max-width: 300px;
 	position: inherit;
 }
 table{
-	
 	border-left: 2px solid #e5e5e5;
+}
+.span4{
+	background-color: red;
+}
+.span8{
+	background-color:blue;
 }
