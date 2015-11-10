@@ -9,7 +9,7 @@ var DartBoard = React.createClass({
       this.props.onHit({score: event.target.id});    
 	},
   handleTouchTap : function(event){
-    Alert("FUCK");    
+    alert("FUCK");    
   },
 	render(){
 		return (
