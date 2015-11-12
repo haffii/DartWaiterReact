@@ -110,7 +110,7 @@ getInitialState: function() {
           <Col xs={12} md={8}>
             <DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/>
           </Col>			
-          <Col md={12} md={4}>
+          <Col xs={12} md={4}>
             <Players onNameSubmit = {this.addPlayer} gameOn = {this.startGame}/>
             <ScoreBoard gameOn = {this.state.gameOn} score = {this.state.score} turn = {this.state.turn} roundScore = {this.state.roundScore} players = {this.state.players}/>
             {this.state.checkout}
