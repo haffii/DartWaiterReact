@@ -8,14 +8,12 @@ th{
 	font-size: 120%;
 	text-align: center;
 }
-#active{
-
-	background-color: #5BC0DE !important;
-}
 td{
 	text-align: center;
 }
-
+h1{
+	font-size: 350%;
+}
 .glyphicon{
 	font-size: 135%;
 }
@@ -43,4 +41,13 @@ table{
 }
 .span8{
 	background-color:blue;
+}
+.dart{
+	max-height: 5%;
+	width: auto;
+}
+.badge.myBadge{
+	background-color: white !important;
+	color: black !important;
+	font-size: 100%;
 }

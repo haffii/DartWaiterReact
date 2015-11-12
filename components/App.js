@@ -2,13 +2,13 @@ var React = require('react');
 var Grid = require('react-bootstrap').Grid;
 var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
-
 var ReactDOM = require('react-dom');
 var Players = require('./Players');
 var ScoreBoard = require('./ScoreBoard');
 var DartBoard = require('./DartBoard');
 var Contestants = require('./Contestants');
 var MyModal = require('./MyModal');
+var Finishes = require('./Finishes');
 var App = React.createClass({
 getInitialState: function() {
     return {
@@ -18,7 +18,8 @@ getInitialState: function() {
       turn : 0,
       gameOn: false,
       gameOnElements:[],
-      modalIsOpen:false
+      modalIsOpen:false,
+      checkout:[]
     };
   },
  addPlayer: function(name){
@@ -69,6 +70,7 @@ getInitialState: function() {
  	}
  	var oldScore = this.state.score[turn][this.state.score[turn].length-1];
  	var newScore = this.checkWin(oldScore,totScore);
+  this.setState({checkout:<Finishes dartsLeft={3-this.state.roundScore.length} score={newScore}/>});
  	if(this.state.roundScore.length == 3){
  		this.state.score[turn].push(newScore);
  		this.setState({score:this.state.score});
@@ -101,20 +103,21 @@ getInitialState: function() {
 	render(){
 	return (
       <Grid>
-      <Row>
-     <Col md={12}> <h1 className="span12">Dart Waiter</h1></Col>
-      </Row>
-			<Row>
-      <Col xs={12} md={8}><DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/></Col>
-			
-      <Col md={12} md={4}>
-      <Players onNameSubmit = {this.addPlayer} gameOn = {this.startGame}/>
-      <ScoreBoard gameOn = {this.state.gameOn} score = {this.state.score} turn = {this.state.turn} roundScore = {this.state.roundScore} players = {this.state.players}/>
-      </Col>
-      </Row>
-      <MyModal modalIsOpen={this.state.modalIsOpen}/>
+        <Row>
+          <Col md={12}> <h1 className="span12">Dart Waiter</h1></Col>
+        </Row>
+			  <Row>
+          <Col xs={12} md={8}>
+            <DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/>
+          </Col>			
+          <Col md={12} md={4}>
+            <Players onNameSubmit = {this.addPlayer} gameOn = {this.startGame}/>
+            <ScoreBoard gameOn = {this.state.gameOn} score = {this.state.score} turn = {this.state.turn} roundScore = {this.state.roundScore} players = {this.state.players}/>
+            {this.state.checkout}
+          </Col>
+        </Row>
+        <MyModal modalIsOpen={this.state.modalIsOpen}/>
       </Grid>
-
 		);
 	}
 
