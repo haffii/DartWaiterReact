@@ -4,7 +4,7 @@ var ScoreBoard = React.createClass({
 getInitialState: function() {
     return {
       names:[],
-      rows:[],
+      rows:[]
     };
   },
 	render(){
@@ -17,7 +17,7 @@ getInitialState: function() {
     this.state.rows = [];
     for(var i = 0; i<playerArr.length;i++){
       if(i == turn){
-        inner.push(<th className="info"><span className="badge myBadge">{dartsLeft}</span> {playerArr[i]}</th>);
+        inner.push(<th className="info"><span className="badge myBadge">{dartsLeft}</span> {playerArr[i]}<span>  {roundScore}</span></th>);
       }
       else{
          inner.push(<th>{playerArr[i]}</th>);

@@ -8,7 +8,7 @@ var DartBoard = React.createClass({
   },
 
 	render(){
-		return (
+	return (
   <Tappable onTap={this.handleTapEvent}>
 	<svg id="dartboard" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" >
   <circle id = "00" fill-rule="evenodd" clip-rule="evenodd" fill="#3F4444" cx="500" cy="500" r="470"/>

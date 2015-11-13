@@ -9,6 +9,7 @@ var DartBoard = require('./DartBoard');
 var Contestants = require('./Contestants');
 var MyModal = require('./MyModal');
 var Finishes = require('./Finishes');
+var RoundScore = require('./RoundScore');
 var App = React.createClass({
 getInitialState: function() {
     return {
@@ -52,7 +53,12 @@ getInitialState: function() {
  },
  checkWin: function(oldScore,newScore){
     if(oldScore-newScore<0 || oldScore-newScore === 1){
-    	//todo endround if dart left
+      for(var i = 0; i<3;i++){
+        this.state.roundScore.push(0);  
+        if(this.state.roundScore.length===3){
+          break;        
+        }
+      }
       return oldScore;
     }
     else if(oldScore-newScore === 0){
@@ -71,7 +77,8 @@ getInitialState: function() {
  	var oldScore = this.state.score[turn][this.state.score[turn].length-1];
  	var newScore = this.checkWin(oldScore,totScore);
   this.setState({checkout:<Finishes dartsLeft={3-this.state.roundScore.length} score={newScore}/>});
- 	if(this.state.roundScore.length == 3){
+ 	
+  if(this.state.roundScore.length == 3){
  		this.state.score[turn].push(newScore);
  		this.setState({score:this.state.score});
  		this.setState({roundScore:[]});
@@ -111,7 +118,7 @@ getInitialState: function() {
             <DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/>
           </Col>			
           <Col xs={12} md={4}>
-            <Players onNameSubmit = {this.addPlayer} gameOn = {this.startGame}/>
+            <Players onNameSubmit = {this.addPlayer} gameOn = {this.startGame}/> 
             <ScoreBoard gameOn = {this.state.gameOn} score = {this.state.score} turn = {this.state.turn} roundScore = {this.state.roundScore} players = {this.state.players}/>
             {this.state.checkout}
           </Col>
