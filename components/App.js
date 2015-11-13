@@ -20,7 +20,8 @@ getInitialState: function() {
       gameOn: false,
       gameOnElements:[],
       modalIsOpen:false,
-      checkout:[]
+      checkout:[],
+      isDouble:false
     };
   },
  addPlayer: function(name){
@@ -30,11 +31,13 @@ getInitialState: function() {
  addScore: function(value){
  	var letter = value.score[0];
  	var mult = 0;
+  this.state.isDouble = false;
  	if(letter == 's'){
  		mult = 1;
  	}
  	else if(letter == 'd'){
  		mult = 2;
+    this.state.isDouble = true;
  	}
  	else if(letter == 't'){
  		mult = 3;
@@ -62,7 +65,15 @@ getInitialState: function() {
       return oldScore;
     }
     else if(oldScore-newScore === 0){
-      return oldScore-newScore;
+      if(this.state.isDouble){
+        this.setState({modalIsOpen: true});
+        return oldScore-newScore;
+      }
+      else{
+        return oldScore;
+      }
+      
+      //return oldScore-newScore;
     }
     else{
       return oldScore-newScore;
@@ -111,13 +122,13 @@ getInitialState: function() {
 	return (
       <Grid>
         <Row>
-          <Col md={12}> <h1 className="span12">Dart Waiter</h1></Col>
+          <Col md={12}> <h1>Dart Waiter</h1></Col>
         </Row>
 			  <Row>
-          <Col xs={12} md={8}>
+          <Col xs={12} sm={8} md={8}>
             <DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/>
           </Col>			
-          <Col xs={12} md={4}>
+          <Col xs={6} sm={4} md={4}>
             <Players onNameSubmit = {this.addPlayer} gameOn = {this.startGame}/> 
             <ScoreBoard gameOn = {this.state.gameOn} score = {this.state.score} turn = {this.state.turn} roundScore = {this.state.roundScore} players = {this.state.players}/>
             {this.state.checkout}

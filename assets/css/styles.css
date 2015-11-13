@@ -40,12 +40,6 @@ h1{
 table{
 	border-left: 2px solid #e5e5e5;
 }
-.span4{
-	background-color: red;
-}
-.span8{
-	background-color:blue;
-}
 .dart{
 	max-height: 5%;
 	width: auto;

@@ -22,7 +22,6 @@ var MyModal = React.createClass({
 
   render: function() {
     return (
-      <div>
          <Modal
           isOpen={this.props.modalIsOpen}
           onRequestClose={this.closeModal}
@@ -36,7 +35,6 @@ var MyModal = React.createClass({
             <button>Restart</button>
           </form>
         </Modal>
-      </div>
     );
   }
 });
