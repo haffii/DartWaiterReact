@@ -3,141 +3,102 @@ var Grid = require('react-bootstrap').Grid;
 var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
 var ReactDOM = require('react-dom');
-var Players = require('./Players');
-var ScoreBoard = require('./ScoreBoard');
 var DartBoard = require('./DartBoard');
-var Contestants = require('./Contestants');
-var MyModal = require('./MyModal');
-var Finishes = require('./Finishes');
-var RoundScore = require('./RoundScore');
+var Players = require('./Players');
+var PlayerModal = require('./PlayerModal');
+var Alert = require('react-bootstrap/lib/Alert');
+var WinModal = require('./WinModal');
 var App = React.createClass({
-getInitialState: function() {
+  getInitialState: function() {
     return {
-      players: [],
-      score:[],
-      roundScore:[],
       turn : 0,
       gameOn: false,
-      gameOnElements:[],
-      modalIsOpen:false,
-      checkout:[],
-      isDouble:false
+      players:[],
+      score : undefined,
+      isDouble:false,
+      gameOver:false,
+      winner:undefined
+
     };
   },
- addPlayer: function(name){
- 	 this.state.players.push(name.name);
- 	 this.setState({players:this.state.players});
- },
- addScore: function(value){
- 	var letter = value.score[0];
- 	var mult = 0;
-  this.state.isDouble = false;
- 	if(letter == 's'){
- 		mult = 1;
- 	}
- 	else if(letter == 'd'){
- 		mult = 2;
-    this.state.isDouble = true;
- 	}
- 	else if(letter == 't'){
- 		mult = 3;
- 	}
- 	else{
- 		mult = 0;
- 	}
- 	var score = mult * value.score.substring(1);
- 	if(isNaN(score)) {
- 		score = 0;
- 	}
- 	this.state.roundScore.push(score);
- 	this.setState({roundScore:this.state.roundScore});
- 	console.log(this.state.turn);
- 	this.updateScore();
- },
- checkWin: function(oldScore,newScore){
-    if(oldScore-newScore<0 || oldScore-newScore === 1){
-      for(var i = 0; i<3;i++){
-        this.state.roundScore.push(0);  
-        if(this.state.roundScore.length===3){
-          break;        
-        }
-      }
-      return oldScore;
+  newGame: function(){
+    this.setState({
+      turn : 0,
+      gameOn: false,
+      players:[],
+      score : undefined,
+      isDouble:false,
+      gameOver:false,
+      winner:undefined
+
+    });
+  },
+  addScore: function(value){
+    var letter = value.score[0];
+    var mult = 0;
+    this.state.isDouble = false;
+    if(letter == 's'){
+      mult = 1;
     }
-    else if(oldScore-newScore === 0){
-      if(this.state.isDouble){
-        this.setState({modalIsOpen: true});
-        return oldScore-newScore;
-      }
-      else{
-        return oldScore;
-      }
-      
-      //return oldScore-newScore;
+    else if(letter == 'd'){
+      mult = 2;
+      this.state.isDouble = true;
+    }
+    else if(letter == 't'){
+      mult = 3;
     }
     else{
-      return oldScore-newScore;
+      mult = 0;
+    }
+    var score = mult * value.score.substring(1);
+    if(isNaN(score)) {
+      score = 0;
+    }
+    this.setState({score:score, isDouble:this.state.isDouble});
+  },
+  addPlayer: function(name){
+   this.state.players.push(name.name);
+   this.setState({players:this.state.players});
+  },
+  startGame: function(){  
+    this.setState({gameOn:true});
+  },
+  changeTurn: function(value){
+    if(this.value != undefined){
+      this.setState({turn:this.value.id});
+    }
+    this.state.score = undefined;
+    if(this.state.turn == this.state.players.length-1)this.setState({turn:0});
+    else{
+      this.setState({turn:this.state.turn+1});
     }
   },
- updateScore: function(){
- 	var totScore = 0;
- 	var turn = this.state.turn;
- 	for(var i = 0; i<this.state.roundScore.length;i++){
- 		totScore += this.state.roundScore[i];
- 	}
- 	var oldScore = this.state.score[turn][this.state.score[turn].length-1];
- 	var newScore = this.checkWin(oldScore,totScore);
-  this.setState({checkout:<Finishes dartsLeft={3-this.state.roundScore.length} score={newScore}/>});
- 	
-  if(this.state.roundScore.length == 3){
- 		this.state.score[turn].push(newScore);
- 		this.setState({score:this.state.score});
- 		this.setState({roundScore:[]});
- 		if(this.state.turn == this.state.players.length-1){
- 			this.state.turn = 0;
- 		}
- 		else{
- 			this.state.turn+=1;			
- 		}
- 		this.setState({turn:this.state.turn});
- 	}
- },
- startGame: function(value){
- 	this.setState({gameOn:true});
-  //this.setState({modalIsOpen:true});
- 	for(var i = 0; i<this.state.players.length;i++){
- 		this.state.score.push([301]);
- 	}
- },
- 			
- editPlayers: function(players){
- 	var state = this.state;
- 	var pos = players.pos;
- 	 this.setState(players => {
-            state.players.splice(pos, 1);
-            return {items: state.players};
-        });
+  gameOver: function(result){
+    this.setState({winner : this.state.players[result.id], gameOver: true})
   },
 	render(){
-	return (
-      <Grid>
-        <Row>
-          <Col md={12}> <h1>Dart Waiter</h1></Col>
-        </Row>
-			  <Row>
-          <Col xs={12} sm={8} md={8}>
-            <DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/>
-          </Col>			
-          <Col xs={6} sm={4} md={4}>
-            <Players onNameSubmit = {this.addPlayer} gameOn = {this.startGame}/> 
-            <ScoreBoard gameOn = {this.state.gameOn} score = {this.state.score} turn = {this.state.turn} roundScore = {this.state.roundScore} players = {this.state.players}/>
-            {this.state.checkout}
-          </Col>
-        </Row>
-        <MyModal modalIsOpen={this.state.modalIsOpen}/>
-      </Grid>
-		);
-	}
+  	return (
+        <Grid>
+          <Row>
+            <Col md={12}> <h1>Dart Waiter</h1></Col>
+          </Row>
+  			  <Row>
+            <Col xs={12} md={8}>
+              <DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/>
+            </Col>			
+            <Col xs={12} md={4}>
+              <Players showInput = {this.state.gameOn} onNameSubmit = {this.addPlayer} gameOn = {this.startGame} />
+              <PlayerModal name = {this.state.players[0]} playerID = {0} turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn}
+               gameOn={this.state.gameOn} isDouble = {this.state.isDouble} gameOver={this.gameOver} />
+
+              <PlayerModal name = {this.state.players[1]} playerID = {1} turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn} 
+              gameOn={this.state.gameOn} isDouble = {this.state.isDouble} gameOver={this.gameOver}/>
+            </Col>
+            <WinModal show={this.state.gameOver} name = {this.state.winner} newGame = {this.newGame}/>
+          </Row>            
+          </Grid>
+  		);
+  }
 
 });
 

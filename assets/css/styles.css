@@ -17,14 +17,7 @@ td{
 }
 h1{
 	font-size: 350%;
-}
-.glyphicon{
-	font-size: 135%;
-}
-.glyphicon-remove{
-	margin-top: 4%;
-	margin-right: 3%;
-	font-size: 600px;
+	text-align: center;
 }
 #dartboard{
 	
@@ -48,4 +41,122 @@ table{
 	background-color: white !important;
 	color: black !important;
 	font-size: 100%;
+}
+.glyphicon{
+	font-size: 135%;
+}
+.glyphicon-remove{
+	margin-top: 4%;
+	margin-right: 3%;
+	font-size: 600px;
+}
+#PlayerModalBody{
+  background-color: red;
+}
+#notimg{
+ color:#ffffff; 
+  width: 310px;
+  height: 260px;
+  margin-top: 15px;
+}
+@import url(http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,800);
+figure.snip1082 {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  min-width: 220px;
+  max-width: 310px;
+  max-height: 260px;
+  width: 100%;
+  background: #000000;
+  text-align: center;
+}
+figure.snip1082 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+figure.snip1082 #notimg {
+  max-width: 100%;
+}
+figure.snip1082 h3 {
+  position: absolute;
+  left: 15px;
+  color: #ffffff;
+  bottom: 10px;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+figure.snip1082 h3 span {
+  font-weight: 800;
+}
+figure.snip1082 > #hoverDiv {
+  width: 100%;
+  bottom: -70px;
+  position: absolute;
+  padding: 12px;
+  color: #ffffff;
+  background: #000000;
+  text-align: right;
+}
+figure.snip1082 > #hoverDiv a i {
+  font-size: 24px;
+  color: #ffffff;
+  padding: 0px 8px;
+  position: relative;
+  bottom: -60px;
+}
+figure.snip1082 a {
+  opacity: 0.8;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+}
+figure.snip1082 a:hover {
+  opacity: 1;
+}
+figure.snip1082.blue {
+  background: #3F4444;
+}
+figure.snip1082.blue.active {
+  background: #1BA9A6;
+}
+figure.snip1082.blue > #hoverDiv {
+  background-color: #EB6001;
+}
+figure.snip1082:hover #notimg,
+figure.snip1082.hover #notimg {
+  opacity: 0.8;
+  top: -30px;
+}
+figure.snip1082:hover h3,
+figure.snip1082.hover h3 {
+  bottom: 58px;
+}
+figure.snip1082:hover > #hoverDiv,
+figure.snip1082.hover > #hoverDiv {
+  bottom: 0;
+}
+figure.snip1082:hover > #hoverDiv a i,
+figure.snip1082.hover > #hoverDiv a i {
+  bottom: 0;
+}
+figure.snip1082:hover a:first-child i,
+figure.snip1082.hover a:first-child i {
+  -webkit-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+}
+figure.snip1082:hover a:nth-child(2) i,
+figure.snip1082.hover a:nth-child(2) i {
+  -webkit-transition-delay: 0.15s;
+  transition-delay: 0.15s;
+}
+figure.snip1082:hover a:nth-child(3) i,
+figure.snip1082.hover a:nth-child(3) i {
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s;
 }
