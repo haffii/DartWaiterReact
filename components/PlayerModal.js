@@ -8,9 +8,7 @@ var PlayerModal = React.createClass({
     	history: [],
     	round:[],
     	gameOn:false,
-    	avgScore:undefined,
     	avgRoundScore:undefined,
-    	noRounds:0,
     	undo:false,
     	dartString:""
     };
@@ -27,22 +25,9 @@ var PlayerModal = React.createClass({
  },
 
  doUndo: function(){
-  var undoValue = this.state.history[this.state.history.length-1];
-  if(this.state.history.length<=0)return;
+  var hissy = this.state.history;
   this.state.history.pop();
-  var newRounds = Math.floor(this.state.history.length/3)*3;
-  var thisRound = [];
-  for(var i = newRounds; i<this.state.history.length; i++){
-  	thisRound.push(this.state.history[i]);
-  }
-  if(thisRound.length>0){
-  	this.state.round = thisRound;
-  }
-  else{
-  	 this.state.round = this.lastThree(this.state.history); 
-  }
-  //this.state.scoreLeft = this.state.scoreLeft+undoValue;
-  this.setState({scoreLeft: this.state.scoreLeft+undoValue, undo: true, round: this.state.round});
+  this.setState({history:this.state.history, undo: true});
  },
 
  doFocus: function(){
@@ -59,7 +44,6 @@ shouldComponentUpdate: function(nextProps, nextState) {
     this.setState({
       scoreLeft:301,
       history: [],
-      round:[],
       gameOn:false,
       avgScore:undefined,
       avgRoundScore:undefined,
@@ -73,30 +57,39 @@ return true;
   render(){
   	if(this.props.turn == this.props.playerID && this.props.gameOn && this.props.score != undefined){
   		if(!this.state.undo){
-         this.state.history.push(this.props.score);
-        this.state.round.push(this.props.score);
-  			this.state.scoreLeft = this.state.scoreLeft-this.props.score;
-  		  if(this.state.scoreLeft <= 1){
-          if(this.state.scoreLeft == 0 && this.props.isDouble){
+        var remaining = this.state.scoreLeft-this.props.score;
+  		  if(remaining<= 1){
+          if(remaining == 0 && this.props.isDouble){
+            this.state.history.push(this.props.score);
             this.props.gameOver({id : this.props.playerID});
           }
-          else{
-            this.state.scoreLeft = this.state.scoreLeft+this.props.score
+          else{ 
+            for(var i = 0; i<3;i++){
+                if(this.state.history.length%3==0){
+                  break;
+                }
+                else{
+                  this.state.history.pop();
+                }
+              }
+            for(var i = 0;i<3;i++){
+            this.state.history.push(0);
+            }
+            }
           }
+          else{       
+            this.state.history.push(this.props.score);
         }
       }	
   	}
-     
-      if(this.state.round.length == 3){
-        this.state.round = [];
-        this.props.onChangeTurn();
-      }
-      
-      var avgScore = 0;
-      for(var i in this.state.history){
-        avgScore += this.state.history[i];
-      }
-    this.state.avgScore = parseFloat(avgScore/this.state.history.length).toFixed(2);
+    this.state.undo = false;
+    var left = 301;
+    for(var i = 0; i<this.state.history.length;i++){
+      left = left-this.state.history[i];
+    }
+    this.state.scoreLeft = left;
+
+
     var noRounds = Math.floor(this.state.history.length/3);
     this.state.noRounds = noRounds;
       if(noRounds>0){
@@ -106,6 +99,7 @@ return true;
         }
         this.state.avgRoundScore = parseFloat(avgRoundScore/noRounds).toFixed(2);
       }
+//avg round score------------------------------------------------
     if(noRounds*3<this.state.history.length){
       var current = [];
       for(var i = noRounds*3; i<this.state.history.length;i++){
@@ -117,22 +111,23 @@ return true;
       var lastRound = [];
       for(var i = this.state.history.length-3; i<this.state.history.length;i++){
         lastRound.push(this.state.history[i]);
-      }
-        
-      
+      } 
       this.state.dartString = <p>Last round : {lastRound.join(", ")}</p>
     }
+    else{
+      this.state.dartString ="";
+    }
+//------------------------------------------------------------------
+
   	if(this.props.turn == this.props.playerID && this.props.gameOn){
   		var ActiveOrNot = "snip1082 blue active";
   	}
   	else{
   		var ActiveOrNot = "snip1082 blue";
   	}
-  	//if(this.state.history.length>0)var showAvg = <p>Avg dart score : {this.state.avgScore}</p>;
   	if(this.state.noRounds>0)var showRoundScore = <p>Avg round score : {this.state.avgRoundScore}</p>;
   	
   	if(this.props.name){
-
   	return(
   		<figure className={ActiveOrNot}>
   			<div id="notimg" >
