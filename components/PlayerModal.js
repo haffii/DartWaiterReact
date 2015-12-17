@@ -73,10 +73,9 @@ return true;
   render(){
   	if(this.props.turn == this.props.playerID && this.props.gameOn && this.props.score != undefined){
   		if(!this.state.undo){
-
+         this.state.history.push(this.props.score);
+        this.state.round.push(this.props.score);
   			this.state.scoreLeft = this.state.scoreLeft-this.props.score;
-  			this.state.history.push(this.props.score);
-  			this.state.round.push(this.props.score);
   		  if(this.state.scoreLeft <= 1){
           if(this.state.scoreLeft == 0 && this.props.isDouble){
             this.props.gameOver({id : this.props.playerID});
@@ -87,7 +86,7 @@ return true;
         }
       }	
   	}
-      if(this.state.round.length>0) this.state.dartString = <p>Recent darts : {this.state.round.join(", ")}</p>
+     
       if(this.state.round.length == 3){
         this.state.round = [];
         this.props.onChangeTurn();
@@ -97,7 +96,7 @@ return true;
       for(var i in this.state.history){
         avgScore += this.state.history[i];
       }
-      this.state.avgScore = parseFloat(avgScore/this.state.history.length).toFixed(2);
+    this.state.avgScore = parseFloat(avgScore/this.state.history.length).toFixed(2);
     var noRounds = Math.floor(this.state.history.length/3);
     this.state.noRounds = noRounds;
       if(noRounds>0){
@@ -107,17 +106,29 @@ return true;
         }
         this.state.avgRoundScore = parseFloat(avgRoundScore/noRounds).toFixed(2);
       }
-  	this.state.undo = false;
-
+    if(noRounds*3<this.state.history.length){
+      var current = [];
+      for(var i = noRounds*3; i<this.state.history.length;i++){
+        current.push(this.state.history[i]);
+      }
+      this.state.dartString = <p>This round : {current.join(", ")}</p>
+    }
+    else if(this.state.history.length>0){
+      var lastRound = [];
+      for(var i = this.state.history.length-3; i<this.state.history.length;i++){
+        lastRound.push(this.state.history[i]);
+      }
+        
+      
+      this.state.dartString = <p>Last round : {lastRound.join(", ")}</p>
+    }
   	if(this.props.turn == this.props.playerID && this.props.gameOn){
   		var ActiveOrNot = "snip1082 blue active";
   	}
   	else{
   		var ActiveOrNot = "snip1082 blue";
   	}
-  	console.log(this.state.avgScore);
-  	var xxx = this.state.avgScore;
-  	if(this.state.history.length>0)var showAvg = <p>Avg dart score : {this.state.avgScore}</p>;
+  	//if(this.state.history.length>0)var showAvg = <p>Avg dart score : {this.state.avgScore}</p>;
   	if(this.state.noRounds>0)var showRoundScore = <p>Avg round score : {this.state.avgRoundScore}</p>;
   	
   	if(this.props.name){
@@ -127,10 +138,8 @@ return true;
   			<div id="notimg" >
   				<h2>{this.state.scoreLeft}</h2>
   				<p>Darts left : {3-this.state.round.length}</p>
-  				{showAvg}
   				{showRoundScore}
   				{this.state.dartString}
-  				<p>Rounds done : {this.state.noRounds}</p>
           <Finishes score ={this.state.scoreLeft} dartsLeft={3-this.state.round.length}/>
   			</div>
   			<h3> <span>{this.props.name}</span></h3>

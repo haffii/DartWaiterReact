@@ -123,7 +123,7 @@ figure.snip1082.blue {
   background: #3F4444;
 }
 figure.snip1082.blue.active {
-  background: #1BA9A6;
+  background-color: #1BA9A6;
 }
 figure.snip1082.blue > #hoverDiv {
   background-color: #EB6001;
