@@ -59,6 +59,10 @@ table{
   height: 260px;
   margin-top: 15px;
 }
+
+#modal{
+  background:none;
+}
 @import url(http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,800);
 figure.snip1082 {

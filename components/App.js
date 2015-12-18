@@ -8,6 +8,7 @@ var Players = require('./Players');
 var PlayerModal = require('./PlayerModal');
 var Alert = require('react-bootstrap/lib/Alert');
 var WinModal = require('./WinModal');
+var Overlay = require('react-bootstrap').Overlay;
 var App = React.createClass({
   getInitialState: function() {
     return {
@@ -84,7 +85,7 @@ var App = React.createClass({
           </Row>
   			  <Row>
             <Col xs={12} md={8}>
-              <DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/>
+                  <DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/>
             </Col>			
             <Col xs={12} md={4}>
               <Players showInput = {this.state.gameOn} onNameSubmit = {this.addPlayer} gameOn = {this.startGame} />

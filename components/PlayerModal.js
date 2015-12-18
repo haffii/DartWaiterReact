@@ -71,14 +71,18 @@ return true;
                 else{
                   this.state.history.pop();
                 }
-              }
+            }
             for(var i = 0;i<3;i++){
-            this.state.history.push(0);
+              this.state.history.push(0);
             }
-            }
+             this.props.onChangeTurn();
+           }
           }
           else{       
             this.state.history.push(this.props.score);
+            if(this.state.history.length%3==0){
+              this.props.onChangeTurn();
+            }
         }
       }	
   	}

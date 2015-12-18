@@ -17,7 +17,7 @@ render(){
 		this.state.showModal = this.props.show;
 	}
 	return(
- 	<Modal show={this.state.showModal} onHide={this.close}>
+ 	<Modal id = "modal" show={this.state.showModal} onHide={this.close}>
           <Modal.Body>
           	<h1>{this.props.name} wins!</h1>           
           </Modal.Body>
