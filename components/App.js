@@ -9,6 +9,7 @@ var PlayerModal = require('./PlayerModal');
 var Alert = require('react-bootstrap/lib/Alert');
 var WinModal = require('./WinModal');
 var Overlay = require('react-bootstrap').Overlay;
+var ScoreAnimation = require('./ScoreAnimation');
 var App = React.createClass({
   getInitialState: function() {
     return {
@@ -18,8 +19,10 @@ var App = React.createClass({
       score : undefined,
       isDouble:false,
       gameOver:false,
-      winner:undefined
-
+      winner:undefined,
+      positionX:0,
+      positionY:0,
+      avgRoundScore:0
     };
   },
   newGame: function(){
@@ -30,8 +33,9 @@ var App = React.createClass({
       score : undefined,
       isDouble:false,
       gameOver:false,
-      winner:undefined
-
+      winner:undefined,
+      positionX:0,
+      positionY:0
     });
   },
   addScore: function(value){
@@ -55,7 +59,7 @@ var App = React.createClass({
     if(isNaN(score)) {
       score = 0;
     }
-    this.setState({score:score, isDouble:this.state.isDouble});
+    this.setState({score:score, isDouble:this.state.isDouble,positionY:value.positionY, positionX:value.positionX});
   },
   addPlayer: function(name){
    this.state.players.push(name.name);
@@ -75,7 +79,7 @@ var App = React.createClass({
     }
   },
   gameOver: function(result){
-    this.setState({winner : this.state.players[result.id], gameOver: true})
+    this.setState({winner : this.state.players[result.id], gameOver: true, avgRoundScore:result.avgRoundScore})
   },
 	render(){
   	return (
@@ -86,6 +90,7 @@ var App = React.createClass({
   			  <Row>
             <Col xs={12} md={8}>
                   <DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/>
+                  <ScoreAnimation score = {this.state.score} gameOn = {this.state.gameOn} positionX={this.state.positionX} positionY = {this.state.positionY}/>
             </Col>			
             <Col xs={12} md={4}>
               <Players showInput = {this.state.gameOn} onNameSubmit = {this.addPlayer} gameOn = {this.startGame} />
@@ -95,7 +100,7 @@ var App = React.createClass({
               <PlayerModal name = {this.state.players[1]} playerID = {1} turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn} 
               gameOn={this.state.gameOn} isDouble = {this.state.isDouble} gameOver={this.gameOver}/>
             </Col>
-            <WinModal show={this.state.gameOver} name = {this.state.winner} newGame = {this.newGame}/>
+            <WinModal avgRoundScore={this.state.avgRoundScore} show={this.state.gameOver} name = {this.state.winner} newGame = {this.newGame}/>
           </Row>            
           </Grid>
   		);

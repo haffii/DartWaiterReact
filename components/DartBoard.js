@@ -3,8 +3,12 @@ var ReactDOM = require("react-dom");
 var Tappable = require('react-tappable');
 var DartBoard = React.createClass({
   handleTapEvent: function(event){
-     if(this.props.gameOn)
-      this.props.onHit({score: event.target.id}); 
+
+    if(!event.pageX && !event.pageY && this.props.gameOn){
+      this.props.onHit({score: event.target.id, positionX: event.changedTouches[0].pageX,positionY: event.changedTouches[0].pageY});
+    }
+    else if(this.props.gameOn)
+      this.props.onHit({score: event.target.id, positionX: event.pageX,positionY: event.pageY}); 
   },
 
 	render(){

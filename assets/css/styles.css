@@ -50,9 +50,6 @@ table{
 	margin-right: 3%;
 	font-size: 600px;
 }
-#PlayerModalBody{
-  background-color: red;
-}
 #notimg{
  color:#ffffff; 
   width: 310px;
@@ -60,9 +57,42 @@ table{
   margin-top: 15px;
 }
 
-#modal{
-  background:none;
+.modal div{
+  
 }
+.modal div h3{
+  text-align: center;
+}
+#footerButtonMenu{
+  margin: 0 auto;
+  width: 80%;
+}
+@-webkit-keyframes fade {
+    0% {opacity:0;font-size:20px;z-index: 1;}
+    50% {opacity:1;font-size:40px;z-index: 1;}
+   100% {opacity:0;font-size:40px;z-index: 1;}
+}
+
+/* Standard syntax */
+@keyframes fade {
+     0% {opacity:0;font-size:20px;z-index: 1;}
+    50% {opacity:1;font-size:40px;z-index: 1;}
+   100% {opacity:0;font-size:40px;z-index: 1;}
+}
+
+@-webkit-keyframes fade2 {
+    0% {opacity:0;font-size:20px;z-index: 1;}
+    50% {opacity:1;font-size:40px;z-index: 1;}
+   100% {opacity:0;font-size:40px;z-index: 1;}
+}
+
+/* Standard syntax */
+@keyframes fade2 {
+     0% {opacity:0;font-size:20px;z-index: 1;}
+    50% {opacity:1;font-size:40px;z-index: 1;}
+   100% {opacity:0;font-size:40px;z-index: 1;}
+}
+
 @import url(http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,800);
 figure.snip1082 {

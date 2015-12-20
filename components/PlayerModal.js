@@ -61,7 +61,7 @@ return true;
   		  if(remaining<= 1){
           if(remaining == 0 && this.props.isDouble){
             this.state.history.push(this.props.score);
-            this.props.gameOver({id : this.props.playerID});
+            this.props.gameOver({id : this.props.playerID, avgRoundScore : this.state.avgRoundScore});
           }
           else{ 
             for(var i = 0; i<3;i++){

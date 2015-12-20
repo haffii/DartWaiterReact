@@ -1,5 +1,6 @@
  var React = require('react');
  var Modal = require('react-bootstrap').Modal;
+ var Button = require('react-bootstrap').button;
  var WinModal = React.createClass({
   getInitialState: function() {
     return { 
@@ -9,20 +10,29 @@
   },
 
   close: function() {
-    this.setState({ showModal: false,close:true });
+    this.setState({ showModal: false,close:false });
     	this.props.newGame({id:this.props.playerID});
   },
 render(){
+  var style = {
+    position: 'absolute',
+    left:this.props.positionX-200,
+    top:this.props.positionY-150,
+  };
 	if(!this.state.close){
 		this.state.showModal = this.props.show;
 	}
 	return(
- 	<Modal id = "modal" show={this.state.showModal} onHide={this.close}>
-          <Modal.Body>
-          	<h1>{this.props.name} wins!</h1>           
-          </Modal.Body>
+ 	<Modal style={style} id = "modal" show={this.state.showModal} onHide={this.close}>
+          <div>
+
+          	<h1>{this.props.name} wins!</h1>
+            <h3>with avg score of {this.props.avgRoundScore}</h3>         
+          </div>
           <Modal.Footer>
-            <button onClick={this.close}>Close</button>
+            <div id="footerButtonMenu">
+              <button className="btn btn-primary" onClick={this.close}>New Game</button>
+            </div>
           </Modal.Footer>
 	</Modal>
 	)}
