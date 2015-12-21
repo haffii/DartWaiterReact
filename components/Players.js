@@ -14,7 +14,7 @@ var Players = React.createClass({
   handleSubmit: function(event) {
   event.preventDefault();
 
-  if(this.state.name.trim() !=="" && this.state.players.length<2){
+  if(this.state.name.trim() !==""){
   	this.state.players.push(this.state.name);
   	this.props.onNameSubmit({name: this.state.name});
    }

@@ -23,6 +23,7 @@ var ScoreAnimation = React.createClass({
   	position: 'absolute',
     left:this.props.positionX-200,
     top:this.props.positionY-150,
+    color:'red',
     margin: 'auto',
     fontWeight: 'bold',
     opacity: 0,

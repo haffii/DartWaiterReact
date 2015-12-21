@@ -82,6 +82,16 @@ var App = React.createClass({
     this.setState({winner : this.state.players[result.id], gameOver: true, avgRoundScore:result.avgRoundScore})
   },
 	render(){
+    var PlayerModals = [];
+    for(var i in this.state.players){
+      PlayerModals.push(<PlayerModal name = {this.state.players[i]} playerID = {i} turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn} gameOn={this.state.gameOn} isDouble = {this.state.isDouble} gameOver={this.gameOver} />);
+
+    }
+    /*<PlayerModal name = {this.state.players[0]} playerID = {0} turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn}
+               gameOn={this.state.gameOn} isDouble = {this.state.isDouble} gameOver={this.gameOver} />
+
+              <PlayerModal name = {this.state.players[1]} playerID = {1} turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn} 
+              gameOn={this.state.gameOn} isDouble = {this.state.isDouble} gameOver={this.gameOver}/>*/
   	return (
         <Grid>
           <Row>
@@ -94,11 +104,7 @@ var App = React.createClass({
             </Col>			
             <Col xs={12} md={4}>
               <Players showInput = {this.state.gameOn} onNameSubmit = {this.addPlayer} gameOn = {this.startGame} />
-              <PlayerModal name = {this.state.players[0]} playerID = {0} turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn}
-               gameOn={this.state.gameOn} isDouble = {this.state.isDouble} gameOver={this.gameOver} />
-
-              <PlayerModal name = {this.state.players[1]} playerID = {1} turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn} 
-              gameOn={this.state.gameOn} isDouble = {this.state.isDouble} gameOver={this.gameOver}/>
+              {PlayerModals}
             </Col>
             <WinModal avgRoundScore={this.state.avgRoundScore} show={this.state.gameOver} name = {this.state.winner} newGame = {this.newGame}/>
           </Row>            
