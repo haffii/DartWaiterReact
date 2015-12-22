@@ -6,6 +6,7 @@ var PlayerModal = React.createClass({
     return {
     	scoreLeft:301,
     	history: [],
+    	round:[],
     	gameOn:false,
     	avgRoundScore:undefined,
     	undo:false,
