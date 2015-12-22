@@ -6,7 +6,6 @@ var PlayerModal = React.createClass({
     return {
     	scoreLeft:301,
     	history: [],
-    	round:[],
     	gameOn:false,
     	avgRoundScore:undefined,
     	undo:false,
@@ -126,16 +125,16 @@ return true;
   		var ActiveOrNot = "snip1082 blue";
   	}
   	if(this.state.noRounds>0)var showRoundScore = <p>Avg round score : {this.state.avgRoundScore}</p>;
-  	
+  	var dartsLeft = 3-this.state.history.length%3;
   	if(this.props.name){
   	return(
   		<figure className={ActiveOrNot}>
   			<div id="notimg" >
   				<h2>{this.state.scoreLeft}</h2>
-  				<p>Darts left : {3-this.state.round.length}</p>
+  				<p>Darts left : {dartsLeft}</p>
   				{showRoundScore}
   				{this.state.dartString}
-          <Finishes score ={this.state.scoreLeft} dartsLeft={3-this.state.round.length}/>
+          <Finishes score ={this.state.scoreLeft} dartsLeft={dartsLeft}/>
   			</div>
   			<h3> <span>{this.props.name}</span></h3>
   			<div id="hoverDiv"><a onClick={this.doUndo}><i className="ion-ios-arrow-back"></i></a><a onClick={this.doFocus}><i className="ion-arrow-expand"></i></a></div>		    

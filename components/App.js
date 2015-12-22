@@ -83,21 +83,23 @@ var App = React.createClass({
   },
 	render(){
     var PlayerModals = [];
-    for(var i in this.state.players){
-      PlayerModals.push(<PlayerModal key = {i} name = {this.state.players[i]} playerID = {i} turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn} gameOn={this.state.gameOn} isDouble = {this.state.isDouble} gameOver={this.gameOver} />);
-
+    var styleTry = {
+      width:'80%',
+      height:'auto'
     }
+    for(var i in this.state.players){
+      PlayerModals.push(<PlayerModal style={styleTry} key = {i} name = {this.state.players[i]} playerID = {i} turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn} gameOn={this.state.gameOn} isDouble = {this.state.isDouble} gameOver={this.gameOver} />);
+    }
+    if(!this.state.gameOn)var headline = <Row><Col md={12}> <h1>Dart Waiter</h1></Col></Row>
      	return (
         <Grid>
-          <Row>
-            <Col md={12}> <h1>Dart Waiter</h1></Col>
-          </Row>
   			  <Row>
-            <Col xs={12} md={8}>
+            <Col xs={11} md={7}>
                   <DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/>
                   <ScoreAnimation score = {this.state.score} gameOn = {this.state.gameOn} positionX={this.state.positionX} positionY = {this.state.positionY}/>
             </Col>			
-            <Col xs={12} md={4}>
+            <Col xs={11} md={4}>
+              {headline}
               <Players showInput = {this.state.gameOn} onNameSubmit = {this.addPlayer} gameOn = {this.startGame} />
               {PlayerModals}
             </Col>

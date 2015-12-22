@@ -2,7 +2,7 @@
 .container {
 	max-width: 1000px;
 	text-align: center;
-	margin: 20px auto;
+	/*margin: 20px auto;*/
 }
 th{
 	font-size: 120%;

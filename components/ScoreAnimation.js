@@ -37,12 +37,12 @@ var ScoreAnimation = React.createClass({
     position: 'absolute',
     left:this.props.positionX-200,
     top:this.props.positionY-150,
-    color:'red',
+    color:'black',
     margin:'auto',
     fontWeight: 'bold',
     opacity: 0,
     zIndex: -1
-  };
+};
 this.state.flip = this.state.flip+1;
   if(this.state.flip%2 == 0 && this.props.gameOn){
   	return(
