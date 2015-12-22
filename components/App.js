@@ -69,9 +69,9 @@ var App = React.createClass({
     this.setState({gameOn:true});
   },
   changeTurn: function(value){
-    if(this.value != undefined){
-      this.setState({turn:this.value.id});
-    }
+    if(value != undefined){
+      return this.setState({turn:value.id});
+    };
     this.state.score = undefined;
     if(this.state.turn == this.state.players.length-1)this.setState({turn:0});
     else{
@@ -84,15 +84,10 @@ var App = React.createClass({
 	render(){
     var PlayerModals = [];
     for(var i in this.state.players){
-      PlayerModals.push(<PlayerModal name = {this.state.players[i]} playerID = {i} turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn} gameOn={this.state.gameOn} isDouble = {this.state.isDouble} gameOver={this.gameOver} />);
+      PlayerModals.push(<PlayerModal key = {i} name = {this.state.players[i]} playerID = {i} turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn} gameOn={this.state.gameOn} isDouble = {this.state.isDouble} gameOver={this.gameOver} />);
 
     }
-    /*<PlayerModal name = {this.state.players[0]} playerID = {0} turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn}
-               gameOn={this.state.gameOn} isDouble = {this.state.isDouble} gameOver={this.gameOver} />
-
-              <PlayerModal name = {this.state.players[1]} playerID = {1} turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn} 
-              gameOn={this.state.gameOn} isDouble = {this.state.isDouble} gameOver={this.gameOver}/>*/
-  	return (
+     	return (
         <Grid>
           <Row>
             <Col md={12}> <h1>Dart Waiter</h1></Col>

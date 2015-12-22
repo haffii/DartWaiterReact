@@ -6,7 +6,6 @@ var PlayerModal = React.createClass({
     return {
     	scoreLeft:301,
     	history: [],
-    	round:[],
     	gameOn:false,
     	avgRoundScore:undefined,
     	undo:false,
@@ -25,7 +24,6 @@ var PlayerModal = React.createClass({
  },
 
  doUndo: function(){
-  var hissy = this.state.history;
   this.state.history.pop();
   this.setState({history:this.state.history, undo: true});
  },
@@ -35,9 +33,6 @@ var PlayerModal = React.createClass({
  		this.props.onChangeTurn({id:this.props.playerID});
  	}
  },
-clearPlayer: function(){
-
-},
 
 shouldComponentUpdate: function(nextProps, nextState) {
   if(nextProps.gameOn !== this.props.gameOn && !nextProps.gameOn){
