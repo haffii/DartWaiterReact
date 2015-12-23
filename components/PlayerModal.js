@@ -124,7 +124,7 @@ return true;
   	else{
   		var ActiveOrNot = "snip1082 blue";
   	}
-  	if(this.state.noRounds>0)var showRoundScore = <p>Avg round score : {this.state.avgRoundScore}</p>;
+  	if(this.state.noRounds>0)var showRoundScore = <p>Avg score : {this.state.avgRoundScore}</p>;
   	var dartsLeft = 3-this.state.history.length%3;
   	if(this.props.name){
   	return(

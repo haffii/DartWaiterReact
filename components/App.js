@@ -83,26 +83,38 @@ var App = React.createClass({
   },
 	render(){
     var PlayerModals = [];
-    var styleTry = {
-      width:'80%',
-      height:'auto'
-    }
+    var playerStyle;
+    var mdModal = 0;
+    var xsModal = 0;
+    //styling stuff ---------------------
+   /* if(this.state.gameOn && this.state.players.length<3){
+      playerStyle = {
+        marginTop:'15%'
+      }
+    }*/
+    //-----------------------------------
+    if(this.state.players.length==1){xsModal=12;mdModal=4;}
+    else{xsModal=6;mdModal=2;};
     for(var i in this.state.players){
-      PlayerModals.push(<PlayerModal style={styleTry} key = {i} name = {this.state.players[i]} playerID = {i} turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn} gameOn={this.state.gameOn} isDouble = {this.state.isDouble} gameOver={this.gameOver} />);
+      PlayerModals.push(<Col style={playerStyle} xs={xsModal} md={mdModal}><PlayerModal key = {i} name = {this.state.players[i]} playerID = {i}
+       turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn} gameOn={this.state.gameOn}
+        isDouble = {this.state.isDouble} gameOver={this.gameOver}/> </Col>);
     }
     if(!this.state.gameOn)var headline = <Row><Col md={12}> <h1>Dart Waiter</h1></Col></Row>
      	return (
         <Grid>
   			  <Row>
-            <Col xs={11} md={7}>
+            <Col xs={11} md={8}>
                   <DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/>
                   <ScoreAnimation score = {this.state.score} gameOn = {this.state.gameOn} positionX={this.state.positionX} positionY = {this.state.positionY}/>
             </Col>			
-            <Col xs={11} md={4}>
+            
+            <Col xs={11} md={4}> 
               {headline}
               <Players showInput = {this.state.gameOn} onNameSubmit = {this.addPlayer} gameOn = {this.startGame} />
-              {PlayerModals}
             </Col>
+              {PlayerModals}
+            
             <WinModal avgRoundScore={this.state.avgRoundScore} show={this.state.gameOver} name = {this.state.winner} newGame = {this.newGame}/>
           </Row>            
           </Grid>
