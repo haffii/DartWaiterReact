@@ -89,14 +89,14 @@ var App = React.createClass({
     //styling stuff ---------------------
    /* if(this.state.gameOn && this.state.players.length<3){
       playerStyle = {
-        marginTop:'15%'
+        marginTop:'5%'
       }
     }*/
     //-----------------------------------
-    if(this.state.players.length==1){xsModal=12;mdModal=4;}
-    else{xsModal=6;mdModal=2;};
+    if(this.state.players.length<3){xsModal=12;mdModal=12;}
+    else{xsModal=6;mdModal=6;};
     for(var i in this.state.players){
-      PlayerModals.push(<Col style={playerStyle} xs={xsModal} md={mdModal}><PlayerModal key = {i} name = {this.state.players[i]} playerID = {i}
+      PlayerModals.push(<Col id="playerModalCol" xs={xsModal} md={mdModal}><PlayerModal key = {i} name = {this.state.players[i]} playerID = {i}
        turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn} gameOn={this.state.gameOn}
         isDouble = {this.state.isDouble} gameOver={this.gameOver}/> </Col>);
     }
@@ -112,8 +112,9 @@ var App = React.createClass({
             <Col xs={11} md={4}> 
               {headline}
               <Players showInput = {this.state.gameOn} onNameSubmit = {this.addPlayer} gameOn = {this.startGame} />
-            </Col>
               {PlayerModals}
+            </Col>
+              
             
             <WinModal avgRoundScore={this.state.avgRoundScore} show={this.state.gameOver} name = {this.state.winner} newGame = {this.newGame}/>
           </Row>            

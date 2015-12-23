@@ -67,6 +67,9 @@ table{
   margin: 0 auto;
   width: 80%;
 }
+#playerModalCol{
+  padding-left: 0; 
+}
 @-webkit-keyframes fade {
     0% {opacity:0;font-size:20px;z-index: 1;}
     50% {opacity:1;font-size:40px;z-index: 1;}
