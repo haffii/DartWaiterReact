@@ -14,16 +14,17 @@ var ScoreAnimation = React.createClass({
   else{return false};
   },
   render(){
-    
+    var colorIt = "red";
+    if(this.props.score>0)colorIt="#2EFC17";
   	var h1Style = {
     WebkitAnimationName: 'fade', /* Chrome, Safari, Opera */
     WebkitAnimationDuration: '2s', /* Chrome, Safari, Opera */
     animationName: 'fade',
     animationDuration: '2s',
   	position: 'absolute',
-    left:this.props.positionX-200,
-    top:this.props.positionY-150,
-    color:'red',
+    left:this.props.positionX-130,
+    top:this.props.positionY-25,
+    color:colorIt,
     margin: 'auto',
     fontWeight: 'bold',
     opacity: 0,
@@ -35,9 +36,9 @@ var ScoreAnimation = React.createClass({
     animationName: 'fade2',
     animationDuration: '2s',
     position: 'absolute',
-    left:this.props.positionX-200,
-    top:this.props.positionY-150,
-    color:'black',
+    left:this.props.positionX-130,
+    top:this.props.positionY-25,
+    color:colorIt,
     margin:'auto',
     fontWeight: 'bold',
     opacity: 0,
