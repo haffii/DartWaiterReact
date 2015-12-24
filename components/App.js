@@ -104,12 +104,12 @@ var App = React.createClass({
      	return (
         <Grid>
   			  <Row>
-            <Col xs={11} md={8}>
+            <Col xs={12} md={8}>
                   <DartBoard gameOn = {this.state.gameOn} onHit = {this.addScore}/>
                   <ScoreAnimation score = {this.state.score} gameOn = {this.state.gameOn} positionX={this.state.positionX} positionY = {this.state.positionY}/>
             </Col>			
             
-            <Col xs={11} md={4}> 
+            <Col xs={12} md={4}> 
               {headline}
               <Players showInput = {this.state.gameOn} onNameSubmit = {this.addPlayer} gameOn = {this.startGame} />
               {PlayerModals}
