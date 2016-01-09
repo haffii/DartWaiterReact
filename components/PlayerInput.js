@@ -5,7 +5,9 @@ var PlayerInput = React.createClass({
       players:[],
       name: "",
       gameOn: false,
-      game:301
+      game:301,
+      class301:"current",
+      class501:""
     };
   },
  handleChange: function(event) {
@@ -20,11 +22,27 @@ var PlayerInput = React.createClass({
    }
    this.setState({name:""});
   },
-
+  handleGameChange: function(event){
+    if(event.currentTarget.id==501){
+      this.setState({
+        class301:"",
+        class501:"current",
+        game:501
+      })
+    }
+    else if(event.currentTarget.id==301){
+      this.setState({
+        class301:"current",
+        class501:"",
+        game:301
+      })
+    }
+    //this.state.501Class
+  },
   gameStartSubmit: function(){
   	if(this.state.players.length || this.props.players.length){
   		this.setState({gameOn:true});
-  		this.props.gameOn({value:true});
+  		this.props.gameOn({value:true,game:this.state.game});
   	}
   },
   shouldComponentUpdate: function(nextProps, nextState) {
@@ -53,9 +71,11 @@ render(){
 <div className="snip1265">
   <div className="plan featured">
     <header>
-
-  
-    <form  onSubmit={this.handleSubmit}>
+<ul id="gamePicker" className="snip1275">
+  <li onClick={this.handleGameChange} id="301" className={this.state.class301}><a>301</a></li>
+  <li onClick={this.handleGameChange} id="501" className={this.state.class501}><a>501</a></li>
+</ul>  
+    <form  onSubmit={this.handleSubmit}>    
         <div style = {divStyle}>
         <input autoFocus style={inputStyle} id="playerInputField" className="form-control" type="text" value={this.state.name} placeholder = "Name" onChange={this.handleChange} />     
         </div>

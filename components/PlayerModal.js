@@ -4,7 +4,7 @@ var Finishes = require('./Finishes');
 var PlayerModal = React.createClass({
  getInitialState: function() {
     return {
-    	scoreLeft:301,
+    	scoreLeft:this.props.game,
     	history: [],
     	gameOn:false,
     	avgRoundScore:undefined,
@@ -37,7 +37,7 @@ var PlayerModal = React.createClass({
 shouldComponentUpdate: function(nextProps, nextState) {
   if(nextProps.gameOn !== this.props.gameOn && !nextProps.gameOn){
     this.setState({
-      scoreLeft:301,
+      scoreLeft:this.props.game,
       history: [],
       gameOn:false,
       avgScore:undefined,
@@ -82,7 +82,7 @@ return true;
       }	
   	}
     this.state.undo = false;
-    var left = 301;
+    var left = this.props.game;
     for(var i = 0; i<this.state.history.length;i++){
       left = left-this.state.history[i];
     }

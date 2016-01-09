@@ -22,7 +22,8 @@ var App = React.createClass({
       winner:undefined,
       positionX:0,
       positionY:0,
-      avgRoundScore:0
+      avgRoundScore:0,
+      game:301
     };
   },
   newGame: function(value){
@@ -39,7 +40,8 @@ var App = React.createClass({
       gameOver:false,
       winner:undefined,
       positionX:0,
-      positionY:0
+      positionY:0,
+      game:301
     });
   },
   addScore: function(value){
@@ -69,9 +71,8 @@ var App = React.createClass({
    this.state.players.push(name.name);
    this.setState({players:this.state.players});
   },
-  startGame: function(){
-    console.log(this.state.players);
-    this.setState({gameOn:true});
+  startGame: function(value){
+    this.setState({gameOn:true,game:value.game});
   },
   changeTurn: function(value){
     if(value != undefined){
@@ -104,7 +105,7 @@ var App = React.createClass({
       if(this.state.gameOn){
       PlayerModals.push(<Col id="playerModalCol" xs={xsModal} md={mdModal}><PlayerModal key = {i} name = {this.state.players[i]} playerID = {i}
        turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn} gameOn={this.state.gameOn}
-        isDouble = {this.state.isDouble} gameOver={this.gameOver}/> </Col>);
+        isDouble = {this.state.isDouble} gameOver={this.gameOver} game={this.state.game}/> </Col>);
     }
     }
      	return (
