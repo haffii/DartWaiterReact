@@ -10,6 +10,7 @@ var Alert = require('react-bootstrap/lib/Alert');
 var WinModal = require('./WinModal');
 var Overlay = require('react-bootstrap').Overlay;
 var ScoreAnimation = require('./ScoreAnimation');
+
 var App = React.createClass({
   getInitialState: function() {
     return {
@@ -23,9 +24,34 @@ var App = React.createClass({
       positionX:0,
       positionY:0,
       avgRoundScore:0,
-      game:301
+      game:301,
+      tabletPlayers: 12,
+      tabletBoard: 12
     };
   },
+  updateDimensions: function() {
+    var board=12;
+    var players=12;
+    if(screen.height<screen.width)
+    {
+      board=8;
+      players=4;
+    }
+    this.setState({
+      tabletBoard:board,
+      tabletPlayers:players
+    })
+    
+    },
+    componentWillMount: function() {
+        this.updateDimensions();
+    },
+    componentDidMount: function() {
+        window.addEventListener("resize", this.updateDimensions);
+    },
+    componentWillUnmount: function() {
+        window.removeEventListener("resize", this.updateDimensions);
+    },
   newGame: function(value){
     var command = value.name;
     var playersValue = [];
@@ -111,12 +137,12 @@ var App = React.createClass({
      	return (
         <Grid>
   			  <Row>
-            <Col xs={12} sm={8} md={8}>
+            <Col xs={12} sm={this.state.tabletBoard} md={8}>
                   <DartBoard id="dartboard" gameOn = {this.state.gameOn} onHit = {this.addScore}/>
                   <ScoreAnimation score = {this.state.score} gameOn = {this.state.gameOn} positionX={this.state.positionX} positionY = {this.state.positionY}/>
             </Col>			
             
-            <Col xs={12} sm={4} md={4}> 
+            <Col xs={12} sm={this.state.tabletPlayers} md={4}> 
               <PlayerInput players = {this.state.players} showInput = {this.state.gameOn} onNameSubmit = {this.addPlayer} gameOn = {this.startGame} />
               {PlayerModals}
             </Col>
