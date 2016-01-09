@@ -9,9 +9,9 @@
      };
   },
 
-  close: function() {
+  close: function(event) {
     this.setState({ showModal: false,close:false });
-    	this.props.newGame({id:this.props.playerID});
+    	this.props.newGame({name:event.target.id});
   },
 render(){
   var style = {
@@ -31,7 +31,8 @@ render(){
           </div>
           <Modal.Footer>
             <div id="footerButtonMenu">
-              <button className="btn btn-primary" onClick={this.close}>New Game</button>
+              <button id="newgame" className="btn btn-success" onClick={this.close}>New Game</button>
+              <button id="rematch" className="btn btn-primary" onClick={this.close}>Rematch</button>
             </div>
           </Modal.Footer>
 	</Modal>

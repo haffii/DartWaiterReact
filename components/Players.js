@@ -22,7 +22,7 @@ var Players = React.createClass({
   },
 
   gameStartSubmit: function(){
-  	if(this.state.players.length){
+  	if(this.state.players.length || this.props.players.length){
   		this.setState({gameOn:true});
   		this.props.gameOn({value:true})
   	}

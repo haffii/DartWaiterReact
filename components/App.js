@@ -4,7 +4,7 @@ var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
 var ReactDOM = require('react-dom');
 var DartBoard = require('./DartBoard');
-var Players = require('./Players');
+var PlayerInput = require('./PlayerInput');
 var PlayerModal = require('./PlayerModal');
 var Alert = require('react-bootstrap/lib/Alert');
 var WinModal = require('./WinModal');
@@ -25,11 +25,15 @@ var App = React.createClass({
       avgRoundScore:0
     };
   },
-  newGame: function(){
+  newGame: function(value){
+    var command = value.name;
+    var playersValue = [];
+    var gameStatus = false;
+    if(value.name == "rematch")playersValue=this.state.players;
     this.setState({
       turn : 0,
-      gameOn: false,
-      players:[],
+      gameOn: gameStatus,
+      players:playersValue,
       score : undefined,
       isDouble:false,
       gameOver:false,
@@ -65,7 +69,8 @@ var App = React.createClass({
    this.state.players.push(name.name);
    this.setState({players:this.state.players});
   },
-  startGame: function(){  
+  startGame: function(){
+    console.log(this.state.players);
     this.setState({gameOn:true});
   },
   changeTurn: function(value){
@@ -79,8 +84,8 @@ var App = React.createClass({
     }
   },
   gameOver: function(result){
-    this.setState({winner : this.state.players[result.id], gameOver: true, avgRoundScore:result.avgRoundScore})
-  },
+    this.setState({winner : this.state.players[result.id], gameOver: true, avgRoundScore:result.avgRoundScore});
+  }, 
 	render(){
     var PlayerModals = [];
     var playerStyle;
@@ -96,11 +101,12 @@ var App = React.createClass({
     if(this.state.players.length<3){xsModal=12;mdModal=12;}
     else{xsModal=6;mdModal=6;};
     for(var i in this.state.players){
+      if(this.state.gameOn){
       PlayerModals.push(<Col id="playerModalCol" xs={xsModal} md={mdModal}><PlayerModal key = {i} name = {this.state.players[i]} playerID = {i}
        turn = {this.state.turn} score = {this.state.score} onChangeTurn = {this.changeTurn} gameOn={this.state.gameOn}
         isDouble = {this.state.isDouble} gameOver={this.gameOver}/> </Col>);
     }
-    if(!this.state.gameOn)var headline = <Row><Col md={12}> <h1>Dart Waiter</h1></Col></Row>
+    }
      	return (
         <Grid>
   			  <Row>
@@ -110,8 +116,7 @@ var App = React.createClass({
             </Col>			
             
             <Col xs={12} md={4}> 
-              {headline}
-              <Players showInput = {this.state.gameOn} onNameSubmit = {this.addPlayer} gameOn = {this.startGame} />
+              <PlayerInput players = {this.state.players} showInput = {this.state.gameOn} onNameSubmit = {this.addPlayer} gameOn = {this.startGame} />
               {PlayerModals}
             </Col>
               

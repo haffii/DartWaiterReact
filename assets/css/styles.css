@@ -23,33 +23,14 @@ h1{
   width: 85%;
   /*height: 100%;*/
 }
-#righty{
-	margin-top: 80px;
-	max-width: 300px;
-}
-#lefty{
-	max-width: 300px;
-	position: inherit;
-}
+
 table{
 	border-left: 2px solid #e5e5e5;
-}
-.dart{
-	max-height: 5%;
-	width: auto;
 }
 .badge.myBadge{
 	background-color: white !important;
 	color: black !important;
 	font-size: 100%;
-}
-.glyphicon{
-	font-size: 135%;
-}
-.glyphicon-remove{
-	margin-top: 4%;
-	margin-right: 3%;
-	font-size: 600px;
 }
 #notimg{
  color:#ffffff; 
@@ -57,9 +38,6 @@ table{
   margin-top: 15px;
 }
 
-.modal div{
-  
-}
 .modal div h3{
   text-align: center;
 }

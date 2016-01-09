@@ -104,7 +104,7 @@ return true;
       for(var i = noRounds*3; i<this.state.history.length;i++){
         current.push(this.state.history[i]);
       }
-      this.state.dartString = <p>This round : {current.join(", ")}</p>
+      this.state.dartString = <p>This round : {current.join(", ")}</p>;
     }
     else if(this.state.history.length>0){
       var lastRound = [];
@@ -126,7 +126,7 @@ return true;
   	}
   	if(this.state.noRounds>0)var showRoundScore = <p>Avg score : {this.state.avgRoundScore}</p>;
   	var dartsLeft = 3-this.state.history.length%3;
-  	if(this.props.name){
+  	if(this.props.name && this.props.gameOn){
   	return(
   		<figure className={ActiveOrNot}>
   			<div id="notimg" >
@@ -137,7 +137,7 @@ return true;
           <Finishes score ={this.state.scoreLeft} dartsLeft={dartsLeft}/>
   			</div>
   			<h3> <span>{this.props.name}</span></h3>
-  			<div id="hoverDiv"><a onClick={this.doUndo}><i className="ion-ios-arrow-back"></i></a><a onClick={this.doFocus}><i className="ion-arrow-expand"></i></a></div>		    
+  			<div id="hoverDiv"><a onClick={this.doUndo}><i className="ion-ios-arrow-back"></i></a><a onClick={this.doFocus}><i className="ion-qr-scanner"></i></a></div>		    
     </figure>
   	)}
   	else{
