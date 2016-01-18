@@ -137,12 +137,12 @@ var App = React.createClass({
      	return (
         <Grid>
   			  <Row>
-            <Col xs={12} sm={this.state.tabletBoard} md={8}>
+            <Col xs={this.state.tabletBoard} sm={this.state.tabletBoard} md={this.state.tabletBoard} >
                   <DartBoard id="dartboard" gameOn = {this.state.gameOn} onHit = {this.addScore}/>
                   <ScoreAnimation score = {this.state.score} gameOn = {this.state.gameOn} positionX={this.state.positionX} positionY = {this.state.positionY}/>
             </Col>			
             
-            <Col xs={12} sm={this.state.tabletPlayers} md={4}> 
+            <Col xs={this.state.tabletPlayers} sm={this.state.tabletPlayers} md={this.state.tabletPlayers}> 
               <PlayerInput players = {this.state.players} showInput = {this.state.gameOn} onNameSubmit = {this.addPlayer} gameOn = {this.startGame} />
               {PlayerModals}
             </Col>

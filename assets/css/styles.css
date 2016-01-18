@@ -2,8 +2,26 @@
 .container {
 	float: center;
 	text-align: center;
+  height: inherit;
 	/*margin: 20px auto;*/
 }
+@media(orientation:landscape) {
+  #dartboard{
+    background-color:red;
+    height: 100%;
+    float: left;
+  }
+  
+}
+@media(orientation:portrait) {
+  #dartboard{
+    background-color:blue;
+    width: 100%;
+    
+  }
+  
+}
+
 th{
 	font-size: 120%;
 	text-align: center;
@@ -20,7 +38,7 @@ h1{
 	text-align: center;
 }
 #dartboard{
-  width: 85%;
+ 
 }
 
 table{
